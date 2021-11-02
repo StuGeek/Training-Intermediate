@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 项目名字是HelloWorld，默认运行的target是run -->
+<project name="HelloWorld" default="run" basedir=".">
+  <!-- 设置项目常用的src、classes、lib路径 -->
+  <property name="src_dir" location="src" />
+  <property name="classes_dir" location="classes"/>
+  <property name="lib_dir" location="lib" />
+  <!--设置junit-4.10.jar的路径-->
+  <path id="junitpath">
+    <pathelement location="${lib_dir}/junit-4.10.jar" />
+  </path>
+  <!-- 初始化项目目录结构 -->
+  <target name="init">
+    <delete dir="${src_dir}"/>
+    <delete dir="${classes_dir}"/>
+    <delete dir="${lib_dir}"/>
+    <mkdir dir="${src_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <mkdir dir="${lib_dir}"/>
+  </target>
+  <!-- 编译任务，使用junit-4.10.jar完成对src文件夹中java源文件的编译，并将生成文件输出到classes文件夹中 -->
+  <target name="compile">
+    <javac srcdir="${src_dir}" destdir="${classes_dir}" classpath="junitpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+  </target>
+  <!-- 运行任务，将classes文件夹中的文件运行起来 -->
+  <target name="run" depends="compile">
+    <java classname="HelloWorld" fork="yes">
+        <classpath path="${classes_dir}"/>
+    </java>
+  </target>
+  <!--清理项目的classes文件夹-->
+  <target name="clean">
+    <delete dir="${classes_dir}" />
+    <mkdir dir="${classes_dir}"/>
+  </target>
+  <!-- 测试HelloWorld.java文件 -->
+  <target name="junit" depends="compile">
+    <junit haltonfailure="true" printsummary="true">
+      <classpath path="${classes_dir}">
+        <path refid="junitpath" />
+      </classpath>
+      <test name="HelloWorldTest" />
+    </junit>
+  </target>
+</project>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 项目名字是Part5，默认运行的target是run -->
+<project name="Part5" default="run" basedir=".">
+  <!-- 设置项目常用的路径 -->
+  <property name="1_dir" location="1"/>
+  <property name="2_dir" location="2"/>
+  <property name="3_dir" location="3"/>
+  <property name="SparseGridRunner_dir" location="SparseGridRunner"/>
+  <property name="classes_dir" location="classes"/>
+  <property name="lib_dir" location="lib" />
+  <!--设置gridworld.jar的路径-->
+  <path id="gridworldpath">
+    <pathelement location="${lib_dir}/gridworld.jar" />
+  </path>
+  <!-- 编译运行SparseGridRunner -->
+  <target name="run">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${1_dir}:${2_dir}:${3_dir}:${SparseGridRunner_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="SparseGridRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+</project>

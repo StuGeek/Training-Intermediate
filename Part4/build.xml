@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 项目名字是Part4，默认运行的target是BlusterCritter -->
+<project name="Part4" default="BlusterCritter" basedir=".">
+  <!-- 设置项目常用的路径 -->
+  <property name="BlusterCritter_dir" location="BlusterCritter"/>
+  <property name="ChameleonKid_dir" location="ChameleonKid"/>
+  <property name="KingCrab_dir" location="KingCrab"/>
+  <property name="ModifiedChameleonCritter_dir" location="ModifiedChameleonCritter"/>
+  <property name="QuickCrab_dir" location="QuickCrab"/>
+  <property name="RockHound_dir" location="RockHound"/>
+  <property name="CrabCritter_dir" location="CrabCritter"/>
+  <property name="classes_dir" location="classes"/>
+  <property name="lib_dir" location="lib" />
+  <!--设置gridworld.jar的路径-->
+  <path id="gridworldpath">
+    <pathelement location="${lib_dir}/gridworld.jar" />
+  </path>
+  <!-- 编译运行BlusterCritter -->
+  <target name="BlusterCritter">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${BlusterCritter_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="BlusterCritterRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+  <!-- 编译运行ChameleonKid -->
+  <target name="ChameleonKid">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${ChameleonKid_dir}:${ModifiedChameleonCritter_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="ChameleonKidRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+  <!-- 编译运行KingCrab -->
+  <target name="KingCrab">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${KingCrab_dir}:${CrabCritter_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="KingCrabRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+  <!-- 编译运行ModifiedChameleonCritter -->
+  <target name="ModifiedChameleonCritter">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${ModifiedChameleonCritter_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="ModifiedChameleonCritterRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+  <!-- 编译运行QuickCrab -->
+  <target name="QuickCrab">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${QuickCrab_dir}:${CrabCritter_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="QuickCrabRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+  <!-- 编译运行RockHound -->
+  <target name="RockHound">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${RockHound_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="RockHoundRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+</project>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 项目名字是Part2，默认运行的target是CircleBug -->
+<project name="Part2" default="CircleBug" basedir=".">
+  <!-- 设置项目常用的路径 -->
+  <property name="circlebug_dir" location="CircleBug"/>
+  <property name="dancingbug_dir" location="DancingBug"/>
+  <property name="spiralbug_dir" location="SpiralBug"/>
+  <property name="zbug_dir" location="ZBug"/>
+  <property name="classes_dir" location="classes"/>
+  <property name="lib_dir" location="lib" />
+  <!--设置gridworld.jar的路径-->
+  <path id="gridworldpath">
+    <pathelement location="${lib_dir}/gridworld.jar" />
+  </path>
+  <!-- 编译运行CircleBug -->
+  <target name="CircleBug">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${circlebug_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="CircleBugRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+  <!-- 编译运行DancingBug -->
+  <target name="DancingBug">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${dancingbug_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="DancingBugRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+  <!-- 编译运行SpiralBug -->
+  <target name="SpiralBug">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${spiralbug_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="SpiralBugRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+  <!-- 编译运行ZBug -->
+  <target name="ZBug">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="${zbug_dir}" destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+    <java classname="ZBugRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+</project>
