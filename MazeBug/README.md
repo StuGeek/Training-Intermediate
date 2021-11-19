@@ -16,8 +16,13 @@
     |-- OneRoadMaze.txt
 |-- lib
     |-- gridworld.jar
+|-- info
+    |-- gridworld
+        |-- maze
+            |-- MazeBug.java
+            |-- MazeBugRunner.java
+            |-- sonar-project.properties
 |-- build.xml
-|-- sonar-project.properties
 |-- Image
 |-- README.md
 ```
@@ -74,7 +79,7 @@
 
 ### Sonar测试
 
-如果要使用Sonar进行分析，首先在终端输入`cd %SONAR_HOME%`进入SonarQube的`bin`文件夹目录下，然后输入`./sonar.sh start`启动Sonar服务，等到在浏览器输入网址 http://localhost:9000/ ，看到SonarQube的服务页面后，进入`MazeBug`项目文件夹，输入`sonar-scanner`，即可进行分析。登录进去之后，点击`MazeBug`项目，可以看到分析结果如下：
+如果要使用Sonar进行分析，首先在终端输入`cd %SONAR_HOME%`进入SonarQube的`bin`文件夹目录下，然后输入`./sonar.sh start`启动Sonar服务，等到在浏览器输入网址 http://localhost:9000/ ，看到SonarQube的服务页面后，为了防止出现错误，将`MazeBug.java`和`MazeBugRunner.java`文件复制到`MazeBug/info/gridworld/maze`中，然后进入`MazeBug/info/gridworld/maze`项目文件夹，输入`sonar-scanner`，即可进行分析。登录进去之后，点击`MazeBug`项目，可以看到分析结果如下：
 
 ![8.png](./Image/8.png)
 
