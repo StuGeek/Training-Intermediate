@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 项目名字是ImageReader，默认运行的target是CircleBug -->
+<project name="ImageReader" default="run" basedir=".">
+  <!-- 设置项目常用的路径 -->
+  <property name="classes_dir" location="classes"/>
+  <property name="lib_dir" location="lib" />
+  <!--设置classpath的路径-->
+  <path id="classpath">
+    <pathelement location="${lib_dir}/appframework-1.0.3.jar" />
+    <pathelement location="${lib_dir}/ImageReader.jar" />
+    <pathelement location="${lib_dir}/junit-4.10.jar" />
+    <pathelement location="${lib_dir}/swing-worker-1.1.jar" />
+  </path>
+  <!-- 编译 -->
+  <target name="compile">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="." destdir="${classes_dir}" classpathref="classpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+  </target>
+  <!-- 运行 -->
+  <target name="run" depends="compile">
+    <java classname="ImageReaderRunner" fork="yes" classpathref="classpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+  <!-- 测试 -->
+  <target name="junit" depends="compile">
+    <junit haltonfailure="true" printsummary="true">
+      <classpath path="${classes_dir}">
+        <path refid="classpath" />
+      </classpath>
+      <test name="ImageProcessorTest" />
+    </junit>
+    <delete dir="${classes_dir}"/>
+  </target>
+</project>

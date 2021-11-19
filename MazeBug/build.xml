@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 项目名字是MazeBug，默认运行的target是run -->
+<project name="MazeBug" default="run" basedir=".">
+  <!-- 设置项目常用的路径 -->
+  <property name="classes_dir" location="classes"/>
+  <property name="lib_dir" location="lib" />
+  <!--设置gridworld.jar的路径-->
+  <path id="gridworldpath">
+    <pathelement location="${lib_dir}/gridworld.jar" />
+  </path>
+  <!-- 编译 -->
+  <target name="compile">
+    <delete dir="${classes_dir}"/>
+    <mkdir dir="${classes_dir}"/>
+    <javac srcdir="." destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+      <!-- 默认使用utf-8编码 -->
+      <compilerarg line="-encoding UTF-8"/>
+    </javac>
+  </target>
+  <!-- 运行 -->
+  <target name="run" depends="compile">
+    <java classname="info.gridworld.maze.MazeBugRunner" fork="yes" classpathref="gridworldpath">
+        <classpath path="${classes_dir}"/>
+    </java>
+    <delete dir="${classes_dir}"/>
+  </target>
+</project>
