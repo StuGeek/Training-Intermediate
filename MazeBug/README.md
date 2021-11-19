@@ -1,4 +1,4 @@
-# Part2
+# MazeBug
 
 ## 文件夹结构
 
