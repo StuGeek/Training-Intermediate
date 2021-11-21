@@ -12,7 +12,7 @@
   <target name="compile">
     <delete dir="${classes_dir}"/>
     <mkdir dir="${classes_dir}"/>
-    <javac srcdir="." destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true">
+    <javac srcdir="." destdir="${classes_dir}" classpathref="gridworldpath" includeantruntime="true" excludes="info/gridworld/maze/*.java">
       <!-- 默认使用utf-8编码 -->
       <compilerarg line="-encoding UTF-8"/>
     </javac>

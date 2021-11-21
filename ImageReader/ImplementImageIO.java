@@ -35,12 +35,12 @@ public class ImplementImageIO implements IImageIO {
 			// create the array to store the width and get the width.
 			byte[] widthByte = new byte[widthByteLength];
 			input.read(widthByte, 0, widthByteLength);
-			int width = toInt(widthByte, 0, widthByteLength);
+			int width = toInt(widthByte, widthByteLength);
 			
 			// create the array to store the height and get the height.
 			byte[] heightByte = new byte[heightByteLength];
 			input.read(heightByte, 0, heightByteLength);
-			int height = toInt(heightByte, 0, heightByteLength);
+			int height = toInt(heightByte, heightByteLength);
 			
 			// create the array to store the information between where stores the height and the bits data.
 			byte[] beforeBitsData = new byte[beforeBitsDataLength];
@@ -56,7 +56,7 @@ public class ImplementImageIO implements IImageIO {
 				for (int j = 0; j < width; j++) {
 					bitsData = new byte[colorBits];
 					input.read(bitsData, 0, colorBits);
-					pix[i * width + j] = 0xff000000 | toInt(bitsData, 0, colorBits);
+					pix[i * width + j] = 0xff000000 | toInt(bitsData, colorBits);
 				}
 				if (length > 0) {
 					bitsData = new byte[length];
@@ -77,7 +77,7 @@ public class ImplementImageIO implements IImageIO {
 			return bufferImage;
 		} catch (Exception e) {
 			Logger log = Logger.getLogger("ImplementImageIO");
-            log.info("write error!", e);
+            log.info("write error!");
 		}
 		return image;
 	}
@@ -85,13 +85,12 @@ public class ImplementImageIO implements IImageIO {
 	/**
 	 * Converts the byte to integer
 	 */
-	private int toInt(byte[] bytes, int offset, int length) {
-		int ans = 0;
-		for (int i = offset; i < offset + length; i++) {
-			int bitsOffset = (i - offset) * bytesLength;
-			ans |= (bytes[i] & 0xff) << bitsOffset;
+	private int toInt(byte[] bytes, int length) {
+		int num = 0;
+		for (int i = 0; i < length; ++i) {
+			num |= (bytes[i] & 0xff) << (i * bytesLength);
 		}
-		return ans;
+		return num;
 	}
 
 	/**
